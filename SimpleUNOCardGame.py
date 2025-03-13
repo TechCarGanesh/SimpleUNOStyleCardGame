@@ -231,7 +231,7 @@ class Game:
        # Deck is a linked list of cards.
        self.deck = LinkedList()
        # Discard pile collects all the cards that are drawn during the game.
-       self.played_cards = []
+       self.discarded_pile = []
 
 
        # Initialize deck with regular and special cards
@@ -302,9 +302,9 @@ class Game:
        # Play a card from a player's hand.
        if 0 <= card_index < len(player.hand):
            card = player.hand.pop(card_index)
-           if len(self.played_cards):
-               if card.color == self.current_color or card.name == self.played_cards[-1]:
-                   self.played_cards.append(card)
+           if len(self.discarded_pile):
+               if card.color == self.current_color or card.name == self.discarded_pile[-1]:
+                   self.discarded_pile.append(card)
                    self.log_action(f"{player.name} played {card}")
                    card.play(player, self)
                else:
